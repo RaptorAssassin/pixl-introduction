@@ -4,10 +4,34 @@
 
 html {
     scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent) transparent;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--accent);
+    border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: var(--accent-strong);
+}
+
+::-webkit-scrollbar-corner {
+    background: transparent;
 }
 
 :root {
-    --accent: oklch(71% 0.12 210);
+    --accent: oklch(70.968% 0.12015 210.431);
     --accent-strong: oklch(76% 0.11 210);
     --accent-color: var(--accent);
 }
