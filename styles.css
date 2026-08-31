@@ -2,31 +2,57 @@
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
+:root {
+    --accent: oklch(71% 0.12 210);
+    --accent-strong: oklch(76% 0.11 210);
+    --accent-color: var(--accent);
+}
+
 body {
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: 600;
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
     background-color: oklch(5% 0.1 100);
     color: whitesmoke;
     width: 100%;
     margin: 0;
     overflow-x: hidden;
+    
 }
 
 section {
     width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 1rem;
+    padding: 0.75rem 1.5rem;
     box-sizing: border-box;
 }
 
 h1 {
-    font-size: 3rem
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0;
+    text-align: center;
+    text-wrap: balance;
 }
 
 section h2 {
-    font-size: 2.5rem;
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0;
+    text-decoration: underline;
+    text-decoration-color: color-mix(in oklch, var(--accent) 45%, transparent);
+    text-decoration-thickness: 3px;
+    text-underline-offset: 8px;
 }
 
 .flex-col {
@@ -36,14 +62,32 @@ section h2 {
     justify-content: center;
 }
 
+#introduction {
+    padding-top: 4rem;
+}
+
 #greeting {
-    font-size: 2rem;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 600;
+    line-height: 1.3;
 }
 
 #greeting-subtitle {
-    width: min(80%, 600px);
+    width: min(90%, 600px);
     text-align: center;
     text-wrap: balance;
+    font-weight: 400;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    margin: 0;
+    opacity: 0.9;
+}
+
+.section-description {
+    margin: 0;
+    font-weight: 400;
+    opacity: 0.85;
+    text-align: center;
 }
 
 #project-list {
@@ -52,33 +96,90 @@ section h2 {
     gap: 1.5rem;
     width: 100%;
     max-width: 1000px;
-    padding: 1rem;
+    padding: 1rem 0 0;
 }
 
 .project-card {
-    padding: 1.25rem;
-    border: 2px solid gray;
+    background-color: color-mix(in oklch, var(--accent) 8%, transparent);
+    padding: 1.5rem;
+    border: 1px solid color-mix(in oklch, var(--accent) 18%, transparent);
     border-radius: 1rem;
     overflow: hidden;
     width: 100%;
-    min-height: 180px;
-    height: 100%;
+    min-height: 220px;
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
 }
 
-.demo-link, .github-link {
-    text-decoration: none;
-    color: inherit;
+.project-card:hover {
+    transform: translateY(-4px);
+    border-color: color-mix(in oklch, var(--accent) 38%, transparent);
+    background-color: color-mix(in oklch, var(--accent) 12%, transparent);
+    box-shadow: 0 8px 24px color-mix(in oklch, var(--accent) 12%, oklch(0% 0 0 / 0.45));
 }
 
 .project-title {
     font-size: 1.2rem;
+    font-weight: 600;
+    line-height: 1.3;
+    margin: 0;
 }
 
 .project-description {
-    font-size: 1rem;
+    font-size: 0.95rem;
+    font-weight: 400;
+    line-height: 1.6;
+    margin: 0;
+    opacity: 0.85;
+    flex-grow: 1;
+}
+
+.project-links {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-top: auto;
+    padding-top: 0.5rem;
+}
+
+.demo-link,
+.github-link {
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+}
+
+.demo-link {
+    background-color: var(--accent);
+    color: oklch(18% 0.03 210);
+    border: 1px solid transparent;
+}
+
+.demo-link:hover {
+    background-color: var(--accent-strong);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px color-mix(in oklch, var(--accent) 30%, transparent);
+}
+
+.github-link {
+    background-color: transparent;
+    color: var(--accent);
+    border: 1px solid color-mix(in oklch, var(--accent) 28%, transparent);
+}
+
+.github-link:hover {
+    background-color: color-mix(in oklch, var(--accent) 12%, transparent);
+    border-color: color-mix(in oklch, var(--accent) 45%, transparent);
+    color: var(--accent-strong);
 }
 
 #contact-badges {
@@ -91,20 +192,163 @@ section h2 {
 .contact-badge {
     width: 3.5rem;
     height: 3.5rem;
-    padding: 0.5rem;
-    transition: all 0.2s ease-in-out;
+    padding: 0.75rem;
+    border-radius: 0.75rem;
+    border: 1px solid transparent;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
 }
 
 .contact-badge:hover {
-    transform: scale(1.1);
+    transform: scale(1.08);
+    background-color: color-mix(in oklch, var(--accent) 15%, transparent);
+    border-color: color-mix(in oklch, var(--accent) 30%, transparent);
+}
+
+.contact-icon {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: contain;
 }
 
 .invert {
     filter: invert(1);
 }
 
-#github-icon {
-    width: 100%;
-    height: 100%;
-    filter: invert(1);
+#greeting {
+    color: var(--accent);
+}
+
+section h2 {
+    text-decoration: underline;
+    text-decoration-color: color-mix(in oklch, var(--accent) 45%, transparent);
+    text-decoration-thickness: 3px;
+    text-underline-offset: 8px;
+}
+
+.project-title {
+    color: var(--accent);
+}
+
+::selection {
+    background-color: color-mix(in oklch, var(--accent) 30%, transparent);
+    color: white;
+}
+
+a:focus-visible,
+.contact-badge:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 0.5rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    .project-card,
+    .contact-badge,
+    .demo-link,
+    .github-link {
+        transition: none;
+    }
+
+    .project-card:hover,
+    .contact-badge:hover,
+    .demo-link:hover {
+        transform: none;
+    }
+
+    .glide-in, .reveal {
+        animation: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+}
+
+.glide-in {
+    animation: fadeInUp 0.8s ease forwards;
+    opacity: 0;
+}
+
+.glide-in-delay-1 {
+    animation-delay: 0.2s;
+}
+
+.glide-in-delay-2 {
+    animation-delay: 0.4s;
+}
+
+.glide-in-delay-3 {
+    animation-delay: 0.6s;
+}
+
+#project-list .project-card:nth-child(1) {
+    animation-delay: 0.2s;
+}
+
+#project-list .project-card:nth-child(2) {
+    animation-delay: 0.4s;
+}
+
+#project-list .project-card:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.skill-badges {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.skill-badge {
+    width: 2.5rem;
+    height: 2.5rem;
+    transition: all 0.2s ease-in-out;
+}
+
+.skill-badge:hover {
+    transform: scale(1.08);
+}
+
+.skill-subtitle {
+    text-align: center;
+    font-size: 0.9rem;
+    opacity: 0.85;
+    font-style: italic;
+}
+
+#footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+#pixl-link {
+    color: white;
+}
+
+#github-link {
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
 }
